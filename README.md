@@ -1,24 +1,71 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Real Estate Management System
+
+A comprehensive real estate management system built with Next.js, Prisma, and Pinata for decentralized image storage.
+
+### Features
+
+- **Company Management**: Add and manage real estate companies
+- **Property Listings**: Create detailed property listings with images
+- **Image Storage**: Decentralized image storage using Pinata IPFS
+- **Responsive Design**: Mobile-friendly interface with shadcn/ui components
+- **Database**: PostgreSQL with Prisma ORM
+
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+1. Node.js 18+ installed
+2. A Pinata account for IPFS image storage
+3. PostgreSQL database (or SQLite for development)
+
+### Setup
+
+1. Clone the repository and install dependencies:
+
+```bash
+npm install
+```
+
+2. Set up environment variables:
+
+```bash
+cp .env.example .env
+```
+
+Edit `.env` and add your Pinata API credentials:
+
+```env
+PINATA_API_KEY=your_pinata_api_key_here
+PINATA_SECRET_API_KEY=your_pinata_secret_api_key_here
+```
+
+3. Set up the database:
+
+```bash
+npm run db:migrate
+npm run db:seed
+```
+
+4. Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Pinata Integration
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This project uses Pinata for decentralized image storage on IPFS. Images uploaded through the forms are automatically stored on IPFS and the URLs are saved to the database.
+
+To get Pinata API keys:
+
+1. Sign up at [Pinata](https://app.pinata.cloud/)
+2. Go to Developers > API Keys
+3. Create a new API key with upload permissions
+4. Add the keys to your `.env` file
 
 ## Learn More
 

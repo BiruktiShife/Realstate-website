@@ -1,0 +1,109 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+// Real Estate Company Model
+model Company {
+  id                String   @id @default(cuid())
+  name              String
+  description       String
+  logo              String
+  logoIpfsHash      String?  // IPFS hash for logo stored on Pinata
+  coverImage        String
+  coverImageIpfsHash String? // IPFS hash for cover image stored on Pinata
+  location          String
+  established       Int
+  propertiesCount   Int      @default(0)
+  rating            Float
+  specialties       String   // JSON string of specialties array
+  featured          Boolean  @default(false)
+
+  // Contact Information (embedded)
+  contactPhone      String
+  contactEmail      String
+  contactWebsite    String
+  contactAddress    String
+
+  // Statistics (embedded)
+  totalSales        Int
+  averagePrice      String
+  clientSatisfaction Int
+
+  // Relationships
+  properties        Property[]
+
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@map("companies")
+}
+
+// Property Model
+model Property {
+  id          String      @id @default(cuid())
+  title       String
+  price       Int         // Store price in cents to avoid floating point issues
+  location    String
+  type        PropertyType
+  bedrooms    Int?
+  bathrooms   Int?
+  area        Int         // Square footage
+  description String
+  features    String      // JSON string of features array
+  status      PropertyStatus
+
+  // Relationships
+  companyId   String
+  company     Company     @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  images      PropertyImage[]
+
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  @@map("properties")
+}
+
+// Property Image Model
+model PropertyImage {
+  id          String   @id @default(cuid())
+  url         String
+  description String?
+  order       Int      @default(0) // For ordering images
+  ipfsHash    String?  // IPFS hash for Pinata storage
+
+  // Relationships
+  propertyId  String
+  property    Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("property_images")
+}
+
+// Enums
+enum PropertyType {
+  APARTMENT
+  HOUSE
+  VILLA
+  COMMERCIAL
+  LAND
+}
+
+enum PropertyStatus {
+  FOR_SALE
+  FOR_RENT
+  SOLD
+  RENTED
+}
