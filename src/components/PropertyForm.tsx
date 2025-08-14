@@ -26,7 +26,6 @@ export function PropertyForm() {
   const [features, setFeatures] = useState<string[]>([]);
   const [newFeature, setNewFeature] = useState("");
   const [images, setImages] = useState<PropertyImage[]>([]);
-  const [newImage, setNewImage] = useState({ url: "", description: "" });
 
   const [formData, setFormData] = useState({
     title: "",
@@ -79,17 +78,6 @@ export function PropertyForm() {
 
   const removeFeature = (feature: string) => {
     setFeatures(features.filter((f) => f !== feature));
-  };
-
-  const addImage = () => {
-    if (newImage.url.trim()) {
-      setImages([...images, { ...newImage }]);
-      setNewImage({ url: "", description: "" });
-    }
-  };
-
-  const removeImage = (index: number) => {
-    setImages(images.filter((_, i) => i !== index));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {

@@ -90,12 +90,17 @@ export async function POST(request: Request) {
         companyId,
         images: {
           create:
-            images?.map((image: any, index: number) => ({
-              url: image.url,
-              description: image.description || "",
-              order: index,
-              ipfsHash: image.hash || null,
-            })) || [],
+            images?.map(
+              (
+                image: { url: string; description?: string; ipfsHash?: string },
+                index: number
+              ) => ({
+                url: image.url,
+                description: image.description || "",
+                order: index,
+                ipfsHash: image.ipfsHash || null,
+              })
+            ) || [],
         },
       },
       include: {

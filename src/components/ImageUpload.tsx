@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState, useRef } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Upload, X, Image as ImageIcon, Loader2 } from 'lucide-react';
+import React, { useState, useRef } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Upload, X, Image as ImageIcon, Loader2 } from "lucide-react";
 
 interface UploadedImage {
   url: string;
@@ -27,7 +27,8 @@ export function ImageUpload({
   existingImages = [],
 }: ImageUploadProps) {
   const [uploading, setUploading] = useState(false);
-  const [uploadedImages, setUploadedImages] = useState<UploadedImage[]>(existingImages);
+  const [uploadedImages, setUploadedImages] =
+    useState<UploadedImage[]>(existingImages);
   const [dragActive, setDragActive] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -44,41 +45,42 @@ export function ImageUpload({
 
     try {
       const formData = new FormData();
-      
+
       // Add files to form data
-      Array.from(files).forEach(file => {
-        formData.append('files', file);
+      Array.from(files).forEach((file) => {
+        formData.append("files", file);
       });
 
       // Add metadata
-      if (propertyId) formData.append('propertyId', propertyId);
-      if (companyId) formData.append('companyId', companyId);
+      if (propertyId) formData.append("propertyId", propertyId);
+      if (companyId) formData.append("companyId", companyId);
 
-      const response = await fetch('/api/upload', {
-        method: 'POST',
+      const response = await fetch("/api/upload", {
+        method: "POST",
         body: formData,
       });
 
       const result = await response.json();
 
       if (!response.ok) {
-        throw new Error(result.error || 'Upload failed');
+        throw new Error(result.error || "Upload failed");
       }
 
       // Add uploaded images to state
-      const newImages = result.results.map((r: any) => ({
-        url: r.url,
-        hash: r.hash,
-        description: '',
-      }));
+      const newImages = result.results.map(
+        (r: { url: string; hash: string }) => ({
+          url: r.url,
+          hash: r.hash,
+          description: "",
+        })
+      );
 
       const updatedImages = [...uploadedImages, ...newImages];
       setUploadedImages(updatedImages);
       onImagesUploaded(updatedImages);
-
     } catch (error) {
-      console.error('Upload error:', error);
-      alert(error instanceof Error ? error.message : 'Upload failed');
+      console.error("Upload error:", error);
+      alert(error instanceof Error ? error.message : "Upload failed");
     } finally {
       setUploading(false);
     }
@@ -93,7 +95,7 @@ export function ImageUpload({
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
     setDragActive(false);
-    
+
     if (e.dataTransfer.files) {
       handleFiles(e.dataTransfer.files);
     }
@@ -111,31 +113,30 @@ export function ImageUpload({
 
   const removeImage = async (index: number) => {
     const imageToRemove = uploadedImages[index];
-    
+
     try {
       // Delete from Pinata
       const response = await fetch(`/api/upload?hash=${imageToRemove.hash}`, {
-        method: 'DELETE',
+        method: "DELETE",
       });
 
       if (!response.ok) {
         const result = await response.json();
-        throw new Error(result.error || 'Deletion failed');
+        throw new Error(result.error || "Deletion failed");
       }
 
       // Remove from state
       const updatedImages = uploadedImages.filter((_, i) => i !== index);
       setUploadedImages(updatedImages);
       onImagesUploaded(updatedImages);
-
     } catch (error) {
-      console.error('Delete error:', error);
-      alert(error instanceof Error ? error.message : 'Failed to delete image');
+      console.error("Delete error:", error);
+      alert(error instanceof Error ? error.message : "Failed to delete image");
     }
   };
 
   const updateImageDescription = (index: number, description: string) => {
-    const updatedImages = uploadedImages.map((img, i) => 
+    const updatedImages = uploadedImages.map((img, i) =>
       i === index ? { ...img, description } : img
     );
     setUploadedImages(updatedImages);
@@ -148,8 +149,8 @@ export function ImageUpload({
       <div
         className={`border-2 border-dashed rounded-lg p-6 text-center transition-colors ${
           dragActive
-            ? 'border-blue-500 bg-blue-50'
-            : 'border-gray-300 hover:border-gray-400'
+            ? "border-blue-500 bg-blue-50"
+            : "border-gray-300 hover:border-gray-400"
         }`}
         onDrop={handleDrop}
         onDragOver={handleDragOver}
@@ -163,12 +164,12 @@ export function ImageUpload({
           onChange={handleFileSelect}
           className="hidden"
         />
-        
+
         <div className="space-y-2">
           <ImageIcon className="mx-auto h-12 w-12 text-gray-400" />
           <div>
             <p className="text-sm text-gray-600">
-              Drag and drop images here, or{' '}
+              Drag and drop images here, or{" "}
               <button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
@@ -181,7 +182,7 @@ export function ImageUpload({
               PNG, JPG, WebP up to 10MB each. Max {maxFiles} images.
             </p>
           </div>
-          
+
           <Button
             type="button"
             variant="outline"
@@ -206,7 +207,9 @@ export function ImageUpload({
       {/* Uploaded Images */}
       {uploadedImages.length > 0 && (
         <div className="space-y-3">
-          <h4 className="font-medium text-sm">Uploaded Images ({uploadedImages.length}/{maxFiles})</h4>
+          <h4 className="font-medium text-sm">
+            Uploaded Images ({uploadedImages.length}/{maxFiles})
+          </h4>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {uploadedImages.map((image, index) => (
               <div key={index} className="border rounded-lg p-3 space-y-2">
@@ -228,8 +231,10 @@ export function ImageUpload({
                 </div>
                 <Input
                   placeholder="Image description (optional)"
-                  value={image.description || ''}
-                  onChange={(e) => updateImageDescription(index, e.target.value)}
+                  value={image.description || ""}
+                  onChange={(e) =>
+                    updateImageDescription(index, e.target.value)
+                  }
                   className="text-sm"
                 />
                 <p className="text-xs text-gray-500 truncate">

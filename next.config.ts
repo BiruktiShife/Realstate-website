@@ -4,9 +4,7 @@ const nextConfig: NextConfig = {
   images: {
     domains: ["gateway.pinata.cloud"], // Add Pinata domain for images
   },
-  experimental: {
-    serverComponentsExternalPackages: ["@prisma/client", "prisma"],
-  },
+  serverExternalPackages: ["@prisma/client", "prisma"],
 };
 
 export default nextConfig;
