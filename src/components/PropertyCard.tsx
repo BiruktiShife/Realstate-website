@@ -125,17 +125,19 @@ export function PropertyCard({ property }: PropertyCardProps) {
         <CardContent className="p-2 sm:p-6">
           {/* Price */}
           <div className="flex items-center justify-between mb-1 sm:mb-2">
-            <h3 className="text-xs sm:text-xl lg:text-2xl font-bold text-blue-600 dark:text-blue-400 leading-tight">
+            <h3 className="text-xs sm:text-xl lg:text-2xl font-semibold text-blue-600 dark:text-blue-400 leading-none">
               {formatPrice(property.price)}
             </h3>
             <div className="flex items-center gap-0.5 sm:gap-1 text-gray-500 dark:text-gray-400">
               <MapPin className="w-2 h-2 sm:w-4 sm:h-4" />
-              <span className="text-xs sm:text-sm">{property.location}</span>
+              <span className="text-xs sm:text-sm leading-none">
+                {property.location}
+              </span>
             </div>
           </div>
 
           {/* Title */}
-          <h4 className="text-xs sm:text-xl font-medium text-gray-900 dark:text-white mb-1 sm:mb-2 line-clamp-1 sm:line-clamp-none leading-tight">
+          <h4 className="text-xs sm:text-xl font-medium text-gray-900 dark:text-white mb-1 sm:mb-2 line-clamp-1 sm:line-clamp-none leading-none">
             {property.title}
           </h4>
 
@@ -149,18 +151,22 @@ export function PropertyCard({ property }: PropertyCardProps) {
             {property.bedrooms && (
               <div className="flex items-center gap-0.5 sm:gap-1">
                 <Bed className="w-2 h-2 sm:w-4 sm:h-4" />
-                <span className="text-xs sm:text-sm">{property.bedrooms}</span>
+                <span className="text-xs sm:text-sm leading-none">
+                  {property.bedrooms}
+                </span>
               </div>
             )}
             {property.bathrooms && (
               <div className="flex items-center gap-0.5 sm:gap-1">
                 <Bath className="w-2 h-2 sm:w-4 sm:h-4" />
-                <span className="text-xs sm:text-sm">{property.bathrooms}</span>
+                <span className="text-xs sm:text-sm leading-none">
+                  {property.bathrooms}
+                </span>
               </div>
             )}
             <div className="flex items-center gap-0.5 sm:gap-1">
               <Square className="w-2 h-2 sm:w-4 sm:h-4" />
-              <span className="text-xs sm:text-sm">
+              <span className="text-xs sm:text-sm leading-none">
                 {property.area.toLocaleString()}
               </span>
             </div>
@@ -187,14 +193,14 @@ export function PropertyCard({ property }: PropertyCardProps) {
           {/* Action Buttons */}
           <div className="flex gap-2">
             <Link href={`/property/${property.id}`} className="flex-1">
-              <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-xs sm:text-sm py-1 sm:py-2 h-7 sm:h-auto">
+              <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-xs sm:text-sm py-0.5 sm:py-2 h-6 sm:h-auto">
                 <span className="hidden sm:inline">View Details</span>
                 <span className="sm:hidden">View</span>
               </Button>
             </Link>
             <Button
               variant="outline"
-              className={`flex-1 text-xs sm:text-sm py-1 sm:py-2 h-7 sm:h-auto transition-all duration-200 ${
+              className={`flex-1 text-xs sm:text-sm py-0.5 sm:py-2 h-6 sm:h-auto transition-all duration-200 ${
                 showContactNumber
                   ? "bg-green-50 border-green-300 text-green-700 hover:bg-green-100 dark:bg-green-900/20 dark:border-green-700 dark:text-green-300"
                   : ""

@@ -62,19 +62,21 @@ export function CompanyCard({ company }: CompanyCardProps) {
               </AvatarFallback>
             </Avatar>
             <div className="flex-1 min-w-0">
-              <h3 className="font-bold text-xs sm:text-xl text-gray-900 dark:text-white group-hover:text-blue-600 transition-colors duration-200 line-clamp-1">
+              <h3 className="font-semibold text-xs sm:text-xl text-gray-900 dark:text-white group-hover:text-blue-600 transition-colors duration-200 line-clamp-1 leading-none">
                 {company.name}
               </h3>
               <div className="flex items-center gap-2 mt-1">
                 <div className="flex items-center gap-0.5 sm:gap-1">
                   <Star className="w-3 h-3 sm:w-4 sm:h-4 fill-yellow-400 text-yellow-400" />
-                  <span className="font-semibold text-xs sm:text-sm text-gray-700 dark:text-gray-300">
+                  <span className="font-medium text-xs sm:text-sm text-gray-700 dark:text-gray-300 leading-none">
                     {company.rating}
                   </span>
                 </div>
                 <div className="flex items-center gap-0.5 sm:gap-1 text-gray-500 dark:text-gray-400">
                   <MapPin className="w-3 h-3 sm:w-4 sm:h-4" />
-                  <span className="text-xs sm:text-sm">{company.location}</span>
+                  <span className="text-xs sm:text-sm leading-none">
+                    {company.location}
+                  </span>
                 </div>
               </div>
             </div>
@@ -111,7 +113,7 @@ export function CompanyCard({ company }: CompanyCardProps) {
             <div className="text-center">
               <div className="text-purple-600 dark:text-purple-400">
                 <span className="font-bold text-xs sm:text-lg">
-                  {company.stats.clientSatisfaction}%</span>
+                  {company.stats.clientSatisfaction}%
                 </span>
               </div>
               <p className="text-xs text-gray-500 dark:text-gray-400">
@@ -158,7 +160,7 @@ export function CompanyCard({ company }: CompanyCardProps) {
 
           {/* Action Button */}
           <Link href={`/company/${company.id}`} className="block">
-            <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0 group-hover:shadow-lg transition-all duration-200 text-xs sm:text-sm py-1 sm:py-2 h-7 sm:h-auto">
+            <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0 group-hover:shadow-lg transition-all duration-200 text-xs sm:text-sm py-0.5 sm:py-2 h-6 sm:h-auto">
               <span className="hidden sm:inline">View Details</span>
               <span className="sm:hidden">View</span>
             </Button>
