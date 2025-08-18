@@ -203,7 +203,7 @@ export function ClientHomePage({ companies }: ClientHomePageProps) {
           <div className="mb-12">
             <div className="text-center mb-8">
               <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-                Featured Properties - MOBILE TEST
+                Featured Properties
               </h2>
               <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
                 Discover exceptional properties from our top-rated real estate
@@ -228,7 +228,7 @@ export function ClientHomePage({ companies }: ClientHomePageProps) {
           {/* Companies Section */}
           <div className="text-center mb-8">
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              Top Real Estate Companies - MOBILE TEST
+              Top Real Estate Companies
             </h2>
             <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
               Partner with industry-leading professionals for your real estate

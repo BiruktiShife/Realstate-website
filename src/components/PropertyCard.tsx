@@ -193,14 +193,14 @@ export function PropertyCard({ property }: PropertyCardProps) {
           {/* Action Buttons */}
           <div className="flex gap-2">
             <Link href={`/property/${property.id}`} className="flex-1">
-              <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-xs sm:text-sm py-0.5 sm:py-2 h-6 sm:h-auto">
+              <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-xs sm:text-sm py-0.5 sm:py-2 h-5 sm:h-auto">
                 <span className="hidden sm:inline">View Details</span>
                 <span className="sm:hidden">View</span>
               </Button>
             </Link>
             <Button
               variant="outline"
-              className={`flex-1 text-xs sm:text-sm py-0.5 sm:py-2 h-6 sm:h-auto transition-all duration-200 ${
+              className={`flex-1 text-xs sm:text-sm py-0.5 sm:py-2 h-5 sm:h-auto transition-all duration-200 ${
                 showContactNumber
                   ? "bg-green-50 border-green-300 text-green-700 hover:bg-green-100 dark:bg-green-900/20 dark:border-green-700 dark:text-green-300"
                   : ""
