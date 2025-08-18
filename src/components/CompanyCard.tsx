@@ -31,7 +31,7 @@ export function CompanyCard({ company }: CompanyCardProps) {
         )}
 
         {/* Cover Image */}
-        <div className="relative h-48 overflow-hidden">
+        <div className="relative h-32 sm:h-48 overflow-hidden">
           <div
             className="w-full h-full bg-gradient-to-r from-blue-500 to-purple-600 group-hover:scale-110 transition-transform duration-700"
             style={{
@@ -45,9 +45,9 @@ export function CompanyCard({ company }: CompanyCardProps) {
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
         </div>
 
-        <CardHeader className="relative -mt-6 sm:-mt-8 z-10 p-4 sm:p-6">
+        <CardHeader className="relative -mt-4 sm:-mt-8 z-10 p-3 sm:p-6">
           <div className="flex items-start gap-3 sm:gap-4">
-            <Avatar className="w-12 h-12 sm:w-16 sm:h-16 border-4 border-white shadow-lg">
+            <Avatar className="w-10 h-10 sm:w-16 sm:h-16 border-2 sm:border-4 border-white shadow-lg">
               <AvatarImage src={company.logo} alt={company.name} />
               <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-600 text-white font-bold text-sm sm:text-lg">
                 {company.name
@@ -58,7 +58,7 @@ export function CompanyCard({ company }: CompanyCardProps) {
               </AvatarFallback>
             </Avatar>
             <div className="flex-1 min-w-0">
-              <h3 className="font-bold text-lg sm:text-xl text-gray-900 dark:text-white group-hover:text-blue-600 transition-colors duration-200">
+              <h3 className="font-bold text-sm sm:text-xl text-gray-900 dark:text-white group-hover:text-blue-600 transition-colors duration-200 line-clamp-1">
                 {company.name}
               </h3>
               <div className="flex items-center gap-2 mt-1">
@@ -77,8 +77,8 @@ export function CompanyCard({ company }: CompanyCardProps) {
           </div>
         </CardHeader>
 
-        <CardContent className="space-y-3 sm:space-y-4 p-4 sm:p-6">
-          <p className="text-gray-600 dark:text-gray-300 text-sm line-clamp-2">
+        <CardContent className="space-y-2 sm:space-y-4 p-3 sm:p-6">
+          <p className="hidden sm:block text-gray-600 dark:text-gray-300 text-sm line-clamp-2">
             {company.description}
           </p>
 
@@ -134,15 +134,21 @@ export function CompanyCard({ company }: CompanyCardProps) {
             )}
           </div>
 
-          {/* Contact Info */}
-          <div className="flex items-center gap-2 sm:gap-4 text-xs sm:text-sm text-gray-500 dark:text-gray-400">
+          {/* Contact Info - Simplified for mobile */}
+          <div className="flex items-center justify-center sm:justify-start gap-3 sm:gap-4 text-xs sm:text-sm text-gray-500 dark:text-gray-400">
             <div className="flex items-center gap-1">
-              <Phone className="w-4 h-4" />
-              <span>{company.contactInfo.phone}</span>
+              <Phone className="w-3 h-3 sm:w-4 sm:h-4" />
+              <span className="hidden sm:inline">
+                {company.contactInfo.phone}
+              </span>
+              <span className="sm:hidden">Call</span>
             </div>
             <div className="flex items-center gap-1">
-              <Mail className="w-4 h-4" />
-              <span className="truncate">{company.contactInfo.email}</span>
+              <Mail className="w-3 h-3 sm:w-4 sm:h-4" />
+              <span className="hidden sm:inline truncate">
+                {company.contactInfo.email}
+              </span>
+              <span className="sm:hidden">Email</span>
             </div>
           </div>
 

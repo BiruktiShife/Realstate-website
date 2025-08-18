@@ -66,7 +66,7 @@ export function PropertyCard({ property }: PropertyCardProps) {
     <div className="group animate-fade-in-up hover:-translate-y-1 transition-all duration-500">
       <Card className="overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-500 bg-white dark:bg-gray-800">
         {/* Image Section */}
-        <div className="relative h-48 sm:h-64 overflow-hidden">
+        <div className="relative h-40 sm:h-64 overflow-hidden">
           <div
             className="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
             style={{
@@ -118,68 +118,64 @@ export function PropertyCard({ property }: PropertyCardProps) {
           <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
         </div>
 
-        <CardContent className="p-4 sm:p-6">
+        <CardContent className="p-3 sm:p-6">
           {/* Price */}
-          <div className="flex items-center justify-between mb-3">
-            <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-blue-600 dark:text-blue-400">
+          <div className="flex items-center justify-between mb-2">
+            <h3 className="text-sm sm:text-xl lg:text-2xl font-bold text-blue-600 dark:text-blue-400">
               {formatPrice(property.price)}
             </h3>
             <div className="flex items-center gap-1 text-gray-500 dark:text-gray-400">
-              <MapPin className="w-4 h-4" />
-              <span className="text-sm">{property.location}</span>
+              <MapPin className="w-3 h-3 sm:w-4 sm:h-4" />
+              <span className="text-xs sm:text-sm">{property.location}</span>
             </div>
           </div>
 
           {/* Title */}
-          <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+          <h4 className="text-sm sm:text-xl font-semibold text-gray-900 dark:text-white mb-1 sm:mb-2 line-clamp-1 sm:line-clamp-none">
             {property.title}
           </h4>
 
-          {/* Description */}
-          <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-2">
+          {/* Description - Hidden on mobile for cleaner look */}
+          <p className="hidden sm:block text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-2">
             {property.description}
           </p>
 
           {/* Property Details */}
-          <div className="flex items-center gap-2 sm:gap-4 mb-4 text-gray-600 dark:text-gray-300">
+          <div className="flex items-center gap-1 sm:gap-4 mb-3 sm:mb-4 text-gray-600 dark:text-gray-300">
             {property.bedrooms && (
-              <div className="flex items-center gap-1">
-                <Bed className="w-4 h-4" />
-                <span className="text-xs sm:text-sm">
-                  {property.bedrooms} bed
-                </span>
+              <div className="flex items-center gap-0.5 sm:gap-1">
+                <Bed className="w-3 h-3 sm:w-4 sm:h-4" />
+                <span className="text-xs sm:text-sm">{property.bedrooms}</span>
               </div>
             )}
             {property.bathrooms && (
-              <div className="flex items-center gap-1">
-                <Bath className="w-4 h-4" />
-                <span className="text-xs sm:text-sm">
-                  {property.bathrooms} bath
-                </span>
+              <div className="flex items-center gap-0.5 sm:gap-1">
+                <Bath className="w-3 h-3 sm:w-4 sm:h-4" />
+                <span className="text-xs sm:text-sm">{property.bathrooms}</span>
               </div>
             )}
-            <div className="flex items-center gap-1">
-              <Square className="w-4 h-4" />
+            <div className="flex items-center gap-0.5 sm:gap-1">
+              <Square className="w-3 h-3 sm:w-4 sm:h-4" />
               <span className="text-xs sm:text-sm">
-                {property.area.toLocaleString()} ka mtr
+                {property.area.toLocaleString()}
               </span>
             </div>
           </div>
 
-          {/* Features */}
-          <div className="flex flex-wrap gap-2 mb-4">
-            {property.features.slice(0, 3).map((feature, index) => (
+          {/* Features - Show fewer on mobile */}
+          <div className="flex flex-wrap gap-1 sm:gap-2 mb-3 sm:mb-4">
+            {property.features.slice(0, 2).map((feature, index) => (
               <Badge
                 key={index}
                 variant="secondary"
-                className="text-xs bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300"
+                className="text-xs bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300 px-2 py-1"
               >
                 {feature}
               </Badge>
             ))}
-            {property.features.length > 3 && (
-              <Badge variant="outline" className="text-xs">
-                +{property.features.length - 3} more
+            {property.features.length > 2 && (
+              <Badge variant="outline" className="text-xs px-2 py-1">
+                +{property.features.length - 2}
               </Badge>
             )}
           </div>
