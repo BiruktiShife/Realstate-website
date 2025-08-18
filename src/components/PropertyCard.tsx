@@ -70,7 +70,7 @@ export function PropertyCard({ property }: PropertyCardProps) {
       </div>
       <Card className="overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-500 bg-white dark:bg-gray-800">
         {/* Image Section */}
-        <div className="relative h-40 sm:h-64 overflow-hidden">
+        <div className="relative h-32 sm:h-64 overflow-hidden">
           <div
             className="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
             style={{
@@ -122,20 +122,20 @@ export function PropertyCard({ property }: PropertyCardProps) {
           <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
         </div>
 
-        <CardContent className="p-3 sm:p-6">
+        <CardContent className="p-2 sm:p-6">
           {/* Price */}
-          <div className="flex items-center justify-between mb-2">
-            <h3 className="text-xs sm:text-xl lg:text-2xl font-bold text-blue-600 dark:text-blue-400">
+          <div className="flex items-center justify-between mb-1 sm:mb-2">
+            <h3 className="text-xs sm:text-xl lg:text-2xl font-bold text-blue-600 dark:text-blue-400 leading-tight">
               {formatPrice(property.price)}
             </h3>
             <div className="flex items-center gap-0.5 sm:gap-1 text-gray-500 dark:text-gray-400">
-              <MapPin className="w-2.5 h-2.5 sm:w-4 sm:h-4" />
+              <MapPin className="w-2 h-2 sm:w-4 sm:h-4" />
               <span className="text-xs sm:text-sm">{property.location}</span>
             </div>
           </div>
 
           {/* Title */}
-          <h4 className="text-xs sm:text-xl font-semibold text-gray-900 dark:text-white mb-1 sm:mb-2 line-clamp-1 sm:line-clamp-none">
+          <h4 className="text-xs sm:text-xl font-medium text-gray-900 dark:text-white mb-1 sm:mb-2 line-clamp-1 sm:line-clamp-none leading-tight">
             {property.title}
           </h4>
 
@@ -145,21 +145,21 @@ export function PropertyCard({ property }: PropertyCardProps) {
           </p>
 
           {/* Property Details */}
-          <div className="flex items-center gap-1 sm:gap-4 mb-3 sm:mb-4 text-gray-600 dark:text-gray-300">
+          <div className="flex items-center gap-1 sm:gap-4 mb-2 sm:mb-4 text-gray-600 dark:text-gray-300">
             {property.bedrooms && (
               <div className="flex items-center gap-0.5 sm:gap-1">
-                <Bed className="w-2.5 h-2.5 sm:w-4 sm:h-4" />
+                <Bed className="w-2 h-2 sm:w-4 sm:h-4" />
                 <span className="text-xs sm:text-sm">{property.bedrooms}</span>
               </div>
             )}
             {property.bathrooms && (
               <div className="flex items-center gap-0.5 sm:gap-1">
-                <Bath className="w-2.5 h-2.5 sm:w-4 sm:h-4" />
+                <Bath className="w-2 h-2 sm:w-4 sm:h-4" />
                 <span className="text-xs sm:text-sm">{property.bathrooms}</span>
               </div>
             )}
             <div className="flex items-center gap-0.5 sm:gap-1">
-              <Square className="w-2.5 h-2.5 sm:w-4 sm:h-4" />
+              <Square className="w-2 h-2 sm:w-4 sm:h-4" />
               <span className="text-xs sm:text-sm">
                 {property.area.toLocaleString()}
               </span>
@@ -167,7 +167,7 @@ export function PropertyCard({ property }: PropertyCardProps) {
           </div>
 
           {/* Features - Show fewer on mobile */}
-          <div className="flex flex-wrap gap-1 sm:gap-2 mb-3 sm:mb-4">
+          <div className="flex flex-wrap gap-1 sm:gap-2 mb-2 sm:mb-4">
             {property.features.slice(0, 2).map((feature, index) => (
               <Badge
                 key={index}
@@ -187,14 +187,14 @@ export function PropertyCard({ property }: PropertyCardProps) {
           {/* Action Buttons */}
           <div className="flex gap-2">
             <Link href={`/property/${property.id}`} className="flex-1">
-              <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-xs sm:text-sm py-1.5 sm:py-2">
+              <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-xs sm:text-sm py-1 sm:py-2 h-7 sm:h-auto">
                 <span className="hidden sm:inline">View Details</span>
                 <span className="sm:hidden">View</span>
               </Button>
             </Link>
             <Button
               variant="outline"
-              className={`flex-1 text-xs sm:text-sm py-1.5 sm:py-2 transition-all duration-200 ${
+              className={`flex-1 text-xs sm:text-sm py-1 sm:py-2 h-7 sm:h-auto transition-all duration-200 ${
                 showContactNumber
                   ? "bg-green-50 border-green-300 text-green-700 hover:bg-green-100 dark:bg-green-900/20 dark:border-green-700 dark:text-green-300"
                   : ""

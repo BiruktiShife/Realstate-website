@@ -35,7 +35,7 @@ export function CompanyCard({ company }: CompanyCardProps) {
         )}
 
         {/* Cover Image */}
-        <div className="relative h-32 sm:h-48 overflow-hidden">
+        <div className="relative h-24 sm:h-48 overflow-hidden">
           <div
             className="w-full h-full bg-gradient-to-r from-blue-500 to-purple-600 group-hover:scale-110 transition-transform duration-700"
             style={{
@@ -49,7 +49,7 @@ export function CompanyCard({ company }: CompanyCardProps) {
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
         </div>
 
-        <CardHeader className="relative -mt-4 sm:-mt-8 z-10 p-3 sm:p-6">
+        <CardHeader className="relative -mt-4 sm:-mt-8 z-10 p-2 sm:p-6">
           <div className="flex items-start gap-3 sm:gap-4">
             <Avatar className="w-10 h-10 sm:w-16 sm:h-16 border-2 sm:border-4 border-white shadow-lg">
               <AvatarImage src={company.logo} alt={company.name} />
@@ -81,13 +81,13 @@ export function CompanyCard({ company }: CompanyCardProps) {
           </div>
         </CardHeader>
 
-        <CardContent className="space-y-2 sm:space-y-4 p-3 sm:p-6">
+        <CardContent className="space-y-1 sm:space-y-4 p-2 sm:p-6">
           <p className="hidden sm:block text-gray-600 dark:text-gray-300 text-sm line-clamp-2">
             {company.description}
           </p>
 
           {/* Stats */}
-          <div className="grid grid-cols-3 gap-1 sm:gap-4 py-2 sm:py-3 border-t border-gray-200 dark:border-gray-700">
+          <div className="grid grid-cols-3 gap-1 sm:gap-4 py-1 sm:py-3 border-t border-gray-200 dark:border-gray-700">
             <div className="text-center">
               <div className="flex items-center justify-center gap-0.5 sm:gap-1 text-blue-600 dark:text-blue-400">
                 <Building className="w-2.5 h-2.5 sm:w-4 sm:h-4" />
@@ -158,7 +158,7 @@ export function CompanyCard({ company }: CompanyCardProps) {
 
           {/* Action Button */}
           <Link href={`/company/${company.id}`} className="block">
-            <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0 group-hover:shadow-lg transition-all duration-200 text-xs sm:text-sm py-1.5 sm:py-2">
+            <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0 group-hover:shadow-lg transition-all duration-200 text-xs sm:text-sm py-1 sm:py-2 h-7 sm:h-auto">
               <span className="hidden sm:inline">View Details</span>
               <span className="sm:hidden">View</span>
             </Button>
