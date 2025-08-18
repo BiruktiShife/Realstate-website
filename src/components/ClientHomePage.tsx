@@ -199,7 +199,7 @@ export function ClientHomePage({ companies }: ClientHomePageProps) {
             </div>
           </div>
 
-          {/* Featured Properties Section */}
+          {/* Featured Properties Section - Mobile Optimized */}
           <div className="mb-12">
             <div className="text-center mb-8">
               <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
