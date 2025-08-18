@@ -66,7 +66,7 @@ export function PropertyCard({ property }: PropertyCardProps) {
     <div className="group animate-fade-in-up hover:-translate-y-1 transition-all duration-500 relative">
       <Card className="overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-500 bg-white dark:bg-gray-800">
         {/* Image Section */}
-        <div className="relative h-32 sm:h-64 overflow-hidden">
+        <div className="relative h-36 sm:h-64 overflow-hidden">
           <div
             className="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
             style={{
@@ -78,12 +78,12 @@ export function PropertyCard({ property }: PropertyCardProps) {
 
           {/* Image Navigation Dots */}
           {property.images.length > 1 && (
-            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
+            <div className="absolute bottom-2 sm:bottom-4 left-1/2 transform -translate-x-1/2 flex gap-1 sm:gap-2">
               {property.images.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => setCurrentImageIndex(index)}
-                  className={`w-2 h-2 rounded-full transition-all duration-200 ${
+                  className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full transition-all duration-200 ${
                     index === currentImageIndex ? "bg-white" : "bg-white/50"
                   }`}
                 />
@@ -92,11 +92,11 @@ export function PropertyCard({ property }: PropertyCardProps) {
           )}
 
           {/* Status Badge */}
-          <div className="absolute top-4 left-4">
+          <div className="absolute top-2 left-2 sm:top-4 sm:left-4">
             <Badge
               className={`${getStatusColor(
                 property.status
-              )} text-white border-0 capitalize`}
+              )} text-white border-0 capitalize text-xs sm:text-sm px-2 py-1 font-medium`}
             >
               {property.status.replace("-", " ")}
             </Badge>
@@ -105,10 +105,10 @@ export function PropertyCard({ property }: PropertyCardProps) {
           {/* Like Button */}
           <button
             onClick={() => setIsLiked(!isLiked)}
-            className="absolute top-4 right-4 w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-all duration-200"
+            className="absolute top-2 right-2 sm:top-4 sm:right-4 w-8 h-8 sm:w-10 sm:h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-all duration-200"
           >
             <Heart
-              className={`w-5 h-5 transition-colors duration-200 ${
+              className={`w-4 h-4 sm:w-5 sm:h-5 transition-colors duration-200 ${
                 isLiked ? "fill-red-500 text-red-500" : "text-white"
               }`}
             />
@@ -118,20 +118,22 @@ export function PropertyCard({ property }: PropertyCardProps) {
           <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
         </div>
 
-        <CardContent className="p-2 sm:p-6 space-y-2 sm:space-y-4">
+        <CardContent className="p-3 sm:p-6 space-y-2 sm:space-y-4">
           {/* Price & Location */}
-          <div className="space-y-1 sm:space-y-2">
-            <h3 className="text-sm sm:text-xl lg:text-2xl font-bold text-blue-600 dark:text-blue-400">
+          <div className="space-y-1">
+            <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-blue-600 dark:text-blue-400">
               {formatPrice(property.price)}
             </h3>
             <div className="flex items-center gap-1 text-gray-500 dark:text-gray-400">
               <MapPin className="w-3 h-3 sm:w-4 sm:h-4" />
-              <span className="text-xs sm:text-sm">{property.location}</span>
+              <span className="text-sm sm:text-sm font-medium">
+                {property.location}
+              </span>
             </div>
           </div>
 
           {/* Title */}
-          <h4 className="text-sm sm:text-xl font-semibold text-gray-900 dark:text-white line-clamp-2 sm:line-clamp-none">
+          <h4 className="text-base sm:text-xl font-semibold text-gray-900 dark:text-white line-clamp-1 sm:line-clamp-none leading-tight">
             {property.title}
           </h4>
 
@@ -141,48 +143,48 @@ export function PropertyCard({ property }: PropertyCardProps) {
           </p>
 
           {/* Property Details */}
-          <div className="flex items-center justify-between text-gray-600 dark:text-gray-300">
+          <div className="flex items-center justify-between bg-gray-50 dark:bg-gray-800 rounded-lg p-2 text-gray-600 dark:text-gray-300">
             {property.bedrooms && (
-              <div className="flex items-center gap-1">
-                <Bed className="w-3 h-3 sm:w-4 sm:h-4" />
-                <span className="text-xs sm:text-sm font-medium">
-                  {property.bedrooms}
+              <div className="flex flex-col items-center gap-1">
+                <Bed className="w-4 h-4 sm:w-4 sm:h-4 text-blue-600" />
+                <span className="text-xs sm:text-sm font-semibold">
+                  {property.bedrooms} bed
                 </span>
               </div>
             )}
             {property.bathrooms && (
-              <div className="flex items-center gap-1">
-                <Bath className="w-3 h-3 sm:w-4 sm:h-4" />
-                <span className="text-xs sm:text-sm font-medium">
-                  {property.bathrooms}
+              <div className="flex flex-col items-center gap-1">
+                <Bath className="w-4 h-4 sm:w-4 sm:h-4 text-blue-600" />
+                <span className="text-xs sm:text-sm font-semibold">
+                  {property.bathrooms} bath
                 </span>
               </div>
             )}
-            <div className="flex items-center gap-1">
-              <Square className="w-3 h-3 sm:w-4 sm:h-4" />
-              <span className="text-xs sm:text-sm font-medium">
-                {property.area.toLocaleString()}
+            <div className="flex flex-col items-center gap-1">
+              <Square className="w-4 h-4 sm:w-4 sm:h-4 text-blue-600" />
+              <span className="text-xs sm:text-sm font-semibold">
+                {property.area.toLocaleString()} sqft
               </span>
             </div>
           </div>
 
           {/* Features */}
-          <div className="flex flex-wrap gap-1 sm:gap-2">
-            {property.features.slice(0, 2).map((feature, index) => (
+          <div className="flex flex-wrap gap-1.5 sm:gap-2">
+            {property.features.slice(0, 3).map((feature, index) => (
               <Badge
                 key={index}
                 variant="secondary"
-                className="text-xs bg-blue-50 text-blue-700 dark:bg-blue-900 dark:text-blue-300 px-2 py-1 font-medium"
+                className="text-xs bg-gradient-to-r from-blue-50 to-purple-50 text-blue-700 dark:bg-blue-900 dark:text-blue-300 px-2.5 py-1 font-medium border border-blue-200 dark:border-blue-700"
               >
                 {feature}
               </Badge>
             ))}
-            {property.features.length > 2 && (
+            {property.features.length > 3 && (
               <Badge
                 variant="outline"
-                className="text-xs px-2 py-1 font-medium"
+                className="text-xs px-2.5 py-1 font-medium border-dashed"
               >
-                +{property.features.length - 2}
+                +{property.features.length - 3} more
               </Badge>
             )}
           </div>
@@ -190,17 +192,17 @@ export function PropertyCard({ property }: PropertyCardProps) {
           {/* Action Buttons */}
           <div className="flex gap-2">
             <Link href={`/property/${property.id}`} className="flex-1">
-              <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-xs sm:text-sm py-2 sm:py-2 h-8 sm:h-auto font-medium">
+              <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-sm sm:text-sm py-2.5 sm:py-2 h-10 sm:h-auto font-semibold shadow-lg hover:shadow-xl transition-all duration-200">
                 <span className="hidden sm:inline">View Details</span>
-                <span className="sm:hidden">View</span>
+                <span className="sm:hidden">View Property</span>
               </Button>
             </Link>
             <Button
               variant="outline"
-              className={`flex-1 text-xs sm:text-sm py-2 sm:py-2 h-8 sm:h-auto font-medium transition-all duration-200 ${
+              className={`flex-1 text-sm sm:text-sm py-2.5 sm:py-2 h-10 sm:h-auto font-semibold border-2 transition-all duration-200 ${
                 showContactNumber
                   ? "bg-green-50 border-green-300 text-green-700 hover:bg-green-100 dark:bg-green-900/20 dark:border-green-700 dark:text-green-300"
-                  : ""
+                  : "border-gray-300 hover:border-blue-500 hover:text-blue-600"
               }`}
               onClick={handleContactClick}
               title={
