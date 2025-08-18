@@ -211,7 +211,7 @@ export function ClientHomePage({ companies }: ClientHomePageProps) {
               </p>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-12">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-12">
               {companies
                 .filter((company) => company.properties.length > 0)
                 .slice(0, 3)
@@ -237,7 +237,7 @@ export function ClientHomePage({ companies }: ClientHomePageProps) {
           </div>
 
           {/* Companies Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 animate-fade-in">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 animate-fade-in">
             {filteredCompanies.map((company, index) => (
               <div
                 key={company.id}

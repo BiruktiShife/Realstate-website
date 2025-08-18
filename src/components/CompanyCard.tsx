@@ -79,7 +79,7 @@ export function CompanyCard({ company }: CompanyCardProps) {
           </div>
         </CardHeader>
 
-        <CardContent className="space-y-2.5 sm:space-y-4 p-2.5 sm:p-6">
+        <CardContent className="space-y-3 sm:space-y-4 p-4 sm:p-6">
           <p className="hidden sm:block text-gray-600 dark:text-gray-300 text-sm line-clamp-2">
             {company.description}
           </p>
@@ -171,8 +171,8 @@ export function CompanyCard({ company }: CompanyCardProps) {
           {/* Action Button */}
           <Link href={`/company/${company.id}`} className="block">
             <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0 group-hover:shadow-lg transition-all duration-200 text-sm sm:text-sm py-2.5 sm:py-2 h-10 sm:h-auto font-semibold shadow-lg hover:shadow-xl">
-              <span className="hidden sm:inline">View Company</span>
-              <span className="sm:hidden">View Company</span>
+              <span className="hidden sm:inline">View Company Details</span>
+              <span className="sm:hidden">View Company Details</span>
             </Button>
           </Link>
         </CardContent>

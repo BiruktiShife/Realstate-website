@@ -118,7 +118,7 @@ export function PropertyCard({ property }: PropertyCardProps) {
           <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
         </div>
 
-        <CardContent className="p-2.5 sm:p-6 space-y-1.5 sm:space-y-4">
+        <CardContent className="p-4 sm:p-6 space-y-3 sm:space-y-4">
           {/* Price & Location */}
           <div className="space-y-1">
             <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-blue-600 dark:text-blue-400">
@@ -143,7 +143,7 @@ export function PropertyCard({ property }: PropertyCardProps) {
           </p>
 
           {/* Property Details */}
-          <div className="flex items-center justify-between bg-gray-50 dark:bg-gray-800 rounded-lg p-1.5 text-gray-600 dark:text-gray-300">
+          <div className="flex items-center justify-between bg-gray-50 dark:bg-gray-800 rounded-lg p-2.5 text-gray-600 dark:text-gray-300">
             {property.bedrooms && (
               <div className="flex flex-col items-center gap-1">
                 <Bed className="w-4 h-4 sm:w-4 sm:h-4 text-blue-600" />
@@ -192,14 +192,14 @@ export function PropertyCard({ property }: PropertyCardProps) {
           {/* Action Buttons */}
           <div className="flex gap-2">
             <Link href={`/property/${property.id}`} className="flex-1">
-              <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-xs sm:text-sm py-1.5 sm:py-2 h-7 sm:h-auto font-semibold shadow-lg hover:shadow-xl transition-all duration-200">
+              <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-sm sm:text-sm py-2.5 sm:py-2 h-10 sm:h-auto font-semibold shadow-lg hover:shadow-xl transition-all duration-200">
                 <span className="hidden sm:inline">View Details</span>
-                <span className="sm:hidden">View</span>
+                <span className="sm:hidden">View Details</span>
               </Button>
             </Link>
             <Button
               variant="outline"
-              className={`flex-1 text-xs sm:text-sm py-1.5 sm:py-2 h-7 sm:h-auto font-semibold border-2 transition-all duration-200 ${
+              className={`flex-1 text-sm sm:text-sm py-2.5 sm:py-2 h-10 sm:h-auto font-semibold border-2 transition-all duration-200 ${
                 showContactNumber
                   ? "bg-green-50 border-green-300 text-green-700 hover:bg-green-100 dark:bg-green-900/20 dark:border-green-700 dark:text-green-300"
                   : "border-gray-300 hover:border-blue-500 hover:text-blue-600"
