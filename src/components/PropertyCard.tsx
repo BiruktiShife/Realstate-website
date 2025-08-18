@@ -141,22 +141,26 @@ export function PropertyCard({ property }: PropertyCardProps) {
           </p>
 
           {/* Property Details */}
-          <div className="flex items-center gap-4 mb-4 text-gray-600 dark:text-gray-300">
+          <div className="flex items-center gap-2 sm:gap-4 mb-4 text-gray-600 dark:text-gray-300">
             {property.bedrooms && (
               <div className="flex items-center gap-1">
                 <Bed className="w-4 h-4" />
-                <span className="text-sm">{property.bedrooms} bed</span>
+                <span className="text-xs sm:text-sm">
+                  {property.bedrooms} bed
+                </span>
               </div>
             )}
             {property.bathrooms && (
               <div className="flex items-center gap-1">
                 <Bath className="w-4 h-4" />
-                <span className="text-sm">{property.bathrooms} bath</span>
+                <span className="text-xs sm:text-sm">
+                  {property.bathrooms} bath
+                </span>
               </div>
             )}
             <div className="flex items-center gap-1">
               <Square className="w-4 h-4" />
-              <span className="text-sm">
+              <span className="text-xs sm:text-sm">
                 {property.area.toLocaleString()} ka mtr
               </span>
             </div>

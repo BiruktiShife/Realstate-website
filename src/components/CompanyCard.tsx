@@ -135,7 +135,7 @@ export function CompanyCard({ company }: CompanyCardProps) {
           </div>
 
           {/* Contact Info */}
-          <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400">
+          <div className="flex items-center gap-2 sm:gap-4 text-xs sm:text-sm text-gray-500 dark:text-gray-400">
             <div className="flex items-center gap-1">
               <Phone className="w-4 h-4" />
               <span>{company.contactInfo.phone}</span>
