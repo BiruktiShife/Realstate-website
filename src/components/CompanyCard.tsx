@@ -58,19 +58,19 @@ export function CompanyCard({ company }: CompanyCardProps) {
               </AvatarFallback>
             </Avatar>
             <div className="flex-1 min-w-0">
-              <h3 className="font-bold text-sm sm:text-xl text-gray-900 dark:text-white group-hover:text-blue-600 transition-colors duration-200 line-clamp-1">
+              <h3 className="font-bold text-xs sm:text-xl text-gray-900 dark:text-white group-hover:text-blue-600 transition-colors duration-200 line-clamp-1">
                 {company.name}
               </h3>
               <div className="flex items-center gap-2 mt-1">
-                <div className="flex items-center gap-1">
-                  <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                  <span className="font-semibold text-gray-700 dark:text-gray-300">
+                <div className="flex items-center gap-0.5 sm:gap-1">
+                  <Star className="w-3 h-3 sm:w-4 sm:h-4 fill-yellow-400 text-yellow-400" />
+                  <span className="font-semibold text-xs sm:text-sm text-gray-700 dark:text-gray-300">
                     {company.rating}
                   </span>
                 </div>
-                <div className="flex items-center gap-1 text-gray-500 dark:text-gray-400">
-                  <MapPin className="w-4 h-4" />
-                  <span className="text-sm">{company.location}</span>
+                <div className="flex items-center gap-0.5 sm:gap-1 text-gray-500 dark:text-gray-400">
+                  <MapPin className="w-3 h-3 sm:w-4 sm:h-4" />
+                  <span className="text-xs sm:text-sm">{company.location}</span>
                 </div>
               </div>
             </div>
@@ -83,11 +83,11 @@ export function CompanyCard({ company }: CompanyCardProps) {
           </p>
 
           {/* Stats */}
-          <div className="grid grid-cols-3 gap-2 sm:gap-4 py-3 border-t border-gray-200 dark:border-gray-700">
+          <div className="grid grid-cols-3 gap-1 sm:gap-4 py-2 sm:py-3 border-t border-gray-200 dark:border-gray-700">
             <div className="text-center">
-              <div className="flex items-center justify-center gap-1 text-blue-600 dark:text-blue-400">
-                <Building className="w-3 h-3 sm:w-4 sm:h-4" />
-                <span className="font-bold text-base sm:text-lg">
+              <div className="flex items-center justify-center gap-0.5 sm:gap-1 text-blue-600 dark:text-blue-400">
+                <Building className="w-2.5 h-2.5 sm:w-4 sm:h-4" />
+                <span className="font-bold text-xs sm:text-lg">
                   {company.propertiesCount}
                 </span>
               </div>
@@ -96,9 +96,9 @@ export function CompanyCard({ company }: CompanyCardProps) {
               </p>
             </div>
             <div className="text-center">
-              <div className="flex items-center justify-center gap-1 text-green-600 dark:text-green-400">
-                <TrendingUp className="w-4 h-4" />
-                <span className="font-bold text-lg">
+              <div className="flex items-center justify-center gap-0.5 sm:gap-1 text-green-600 dark:text-green-400">
+                <TrendingUp className="w-2.5 h-2.5 sm:w-4 sm:h-4" />
+                <span className="font-bold text-xs sm:text-lg">
                   {company.stats.totalSales}
                 </span>
               </div>
@@ -106,8 +106,8 @@ export function CompanyCard({ company }: CompanyCardProps) {
             </div>
             <div className="text-center">
               <div className="text-purple-600 dark:text-purple-400">
-                <span className="font-bold text-lg">
-                  {company.stats.clientSatisfaction}%
+                <span className="font-bold text-xs sm:text-lg">
+                  {company.stats.clientSatisfaction}%</span>
                 </span>
               </div>
               <p className="text-xs text-gray-500 dark:text-gray-400">
@@ -154,8 +154,9 @@ export function CompanyCard({ company }: CompanyCardProps) {
 
           {/* Action Button */}
           <Link href={`/company/${company.id}`} className="block">
-            <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0 group-hover:shadow-lg transition-all duration-200">
-              View Details
+            <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0 group-hover:shadow-lg transition-all duration-200 text-xs sm:text-sm py-1.5 sm:py-2">
+              <span className="hidden sm:inline">View Details</span>
+              <span className="sm:hidden">View</span>
             </Button>
           </Link>
         </CardContent>
