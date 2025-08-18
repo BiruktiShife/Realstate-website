@@ -63,7 +63,11 @@ export function PropertyCard({ property }: PropertyCardProps) {
   };
 
   return (
-    <div className="group animate-fade-in-up hover:-translate-y-1 transition-all duration-500">
+    <div className="group animate-fade-in-up hover:-translate-y-1 transition-all duration-500 relative">
+      {/* Mobile Layout Indicator - Temporary */}
+      <div className="sm:hidden absolute top-1 right-1 bg-red-500 text-white text-xs px-1 py-0.5 rounded z-10">
+        MOBILE
+      </div>
       <Card className="overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-500 bg-white dark:bg-gray-800">
         {/* Image Section */}
         <div className="relative h-40 sm:h-64 overflow-hidden">

@@ -14,7 +14,11 @@ interface CompanyCardProps {
 
 export function CompanyCard({ company }: CompanyCardProps) {
   return (
-    <div className="group animate-fade-in-up hover:scale-105 hover:-translate-y-2 transition-all duration-500">
+    <div className="group animate-fade-in-up hover:scale-105 hover:-translate-y-2 transition-all duration-500 relative">
+      {/* Mobile Layout Indicator - Temporary */}
+      <div className="sm:hidden absolute top-1 right-1 bg-blue-500 text-white text-xs px-1 py-0.5 rounded z-20">
+        MOBILE
+      </div>
       <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-white via-blue-50/30 to-purple-50/30 dark:from-gray-900 dark:via-blue-900/20 dark:to-purple-900/20 shadow-xl hover:shadow-2xl transition-all duration-500 backdrop-blur-sm">
         {/* Glowing border for featured companies */}
         {company.featured && (
