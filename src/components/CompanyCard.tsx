@@ -15,10 +15,6 @@ interface CompanyCardProps {
 export function CompanyCard({ company }: CompanyCardProps) {
   return (
     <div className="group animate-fade-in-up hover:scale-105 hover:-translate-y-2 transition-all duration-500 relative">
-      {/* Mobile Layout Indicator - Temporary */}
-      <div className="sm:hidden absolute top-1 right-1 bg-blue-500 text-white text-xs px-1 py-0.5 rounded z-20">
-        MOBILE
-      </div>
       <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-white via-blue-50/30 to-purple-50/30 dark:from-gray-900 dark:via-blue-900/20 dark:to-purple-900/20 shadow-xl hover:shadow-2xl transition-all duration-500 backdrop-blur-sm">
         {/* Glowing border for featured companies */}
         {company.featured && (
@@ -35,7 +31,7 @@ export function CompanyCard({ company }: CompanyCardProps) {
         )}
 
         {/* Cover Image */}
-        <div className="relative h-20 sm:h-48 overflow-hidden">
+        <div className="relative h-32 sm:h-48 overflow-hidden">
           <div
             className="w-full h-full bg-gradient-to-r from-blue-500 to-purple-600 group-hover:scale-110 transition-transform duration-700"
             style={{
@@ -49,9 +45,9 @@ export function CompanyCard({ company }: CompanyCardProps) {
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
         </div>
 
-        <CardHeader className="relative -mt-3 sm:-mt-8 z-10 p-1.5 sm:p-6">
+        <CardHeader className="relative -mt-6 sm:-mt-8 z-10 p-3 sm:p-6">
           <div className="flex items-start gap-3 sm:gap-4">
-            <Avatar className="w-8 h-8 sm:w-16 sm:h-16 border-2 sm:border-4 border-white shadow-lg">
+            <Avatar className="w-12 h-12 sm:w-16 sm:h-16 border-3 sm:border-4 border-white shadow-lg">
               <AvatarImage src={company.logo} alt={company.name} />
               <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-600 text-white font-bold text-sm sm:text-lg">
                 {company.name
@@ -62,7 +58,7 @@ export function CompanyCard({ company }: CompanyCardProps) {
               </AvatarFallback>
             </Avatar>
             <div className="flex-1 min-w-0">
-              <h3 className="font-semibold text-xs sm:text-xl text-gray-900 dark:text-white group-hover:text-blue-600 transition-colors duration-200 line-clamp-1 leading-none">
+              <h3 className="font-bold text-sm sm:text-xl text-gray-900 dark:text-white group-hover:text-blue-600 transition-colors duration-200 line-clamp-1">
                 {company.name}
               </h3>
               <div className="flex items-center gap-2 mt-1">
@@ -83,7 +79,7 @@ export function CompanyCard({ company }: CompanyCardProps) {
           </div>
         </CardHeader>
 
-        <CardContent className="space-y-1 sm:space-y-4 p-1.5 sm:p-6">
+        <CardContent className="space-y-3 sm:space-y-4 p-3 sm:p-6">
           <p className="hidden sm:block text-gray-600 dark:text-gray-300 text-sm line-clamp-2">
             {company.description}
           </p>
@@ -160,7 +156,7 @@ export function CompanyCard({ company }: CompanyCardProps) {
 
           {/* Action Button */}
           <Link href={`/company/${company.id}`} className="block">
-            <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0 group-hover:shadow-lg transition-all duration-200 text-xs sm:text-sm py-0.5 sm:py-2 h-5 sm:h-auto">
+            <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0 group-hover:shadow-lg transition-all duration-200 text-xs sm:text-sm py-2 sm:py-2 h-8 sm:h-auto font-medium">
               <span className="hidden sm:inline">View Details</span>
               <span className="sm:hidden">View</span>
             </Button>
