@@ -2,9 +2,17 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Building2, Home, Menu, X, Database, BarChart3 } from "lucide-react";
+import {
+  Building2,
+  Home,
+  Menu,
+  X,
+  Database,
+  BarChart3,
+  LogOut,
+} from "lucide-react";
 
 interface AdminLayoutProps {
   children: React.ReactNode;
@@ -13,6 +21,17 @@ interface AdminLayoutProps {
 export function AdminLayout({ children }: AdminLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    try {
+      await fetch("/api/admin/logout", { method: "POST" });
+      router.push("/admin/login");
+      router.refresh();
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  };
 
   const navigation = [
     {
@@ -110,13 +129,21 @@ export function AdminLayout({ children }: AdminLayoutProps) {
               </Link>
             ))}
           </nav>
-          <div className="p-4 border-t border-gray-200 dark:border-gray-700">
+          <div className="p-4 border-t border-gray-200 dark:border-gray-700 space-y-2">
             <Link href="/">
               <Button variant="outline" className="w-full">
                 <Home className="mr-2 h-4 w-4" />
                 Back to Site
               </Button>
             </Link>
+            <Button
+              variant="outline"
+              className="w-full text-red-600 border-red-200 hover:bg-red-50 hover:text-red-700 dark:text-red-400 dark:border-red-800 dark:hover:bg-red-900/20"
+              onClick={handleLogout}
+            >
+              <LogOut className="mr-2 h-4 w-4" />
+              Sign Out
+            </Button>
           </div>
         </div>
       </div>
