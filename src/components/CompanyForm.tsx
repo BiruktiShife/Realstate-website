@@ -8,31 +8,40 @@ import { Badge } from "@/components/ui/badge";
 import { ImageUpload } from "@/components/ImageUpload";
 import { Building2, Plus, X, Loader2 } from "lucide-react";
 
-export function CompanyForm() {
+interface CompanyFormProps {
+  company?: any;
+  isEdit?: boolean;
+}
+
+export function CompanyForm({ company, isEdit = false }: CompanyFormProps) {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
-  const [specialties, setSpecialties] = useState<string[]>([]);
+  const [specialties, setSpecialties] = useState<string[]>(
+    company?.specialties || []
+  );
   const [newSpecialty, setNewSpecialty] = useState("");
 
   const [formData, setFormData] = useState({
-    name: "",
-    description: "",
-    logo: "",
-    logoIpfsHash: "",
-    coverImage: "",
-    coverImageIpfsHash: "",
-    location: "",
-    established: "",
-    rating: "",
-    featured: false,
-    contactPhone: "",
-    contactEmail: "",
-    contactWebsite: "",
-    contactAddress: "",
-    totalSales: "",
-    averagePrice: "",
-    clientSatisfaction: "",
+    name: company?.name || "",
+    description: company?.description || "",
+    logo: company?.logo || "",
+    logoIpfsHash: company?.logoIpfsHash || "",
+    coverImage: company?.coverImage || "",
+    coverImageIpfsHash: company?.coverImageIpfsHash || "",
+    location: company?.location || "",
+    established: company?.established
+      ? new Date(company.established).toISOString().split("T")[0]
+      : "",
+    rating: company?.rating?.toString() || "",
+    featured: company?.featured || false,
+    contactPhone: company?.contactPhone || "",
+    contactEmail: company?.contactEmail || "",
+    contactWebsite: company?.contactWebsite || "",
+    contactAddress: company?.contactAddress || "",
+    totalSales: company?.totalSales?.toString() || "",
+    averagePrice: company?.averagePrice?.toString() || "",
+    clientSatisfaction: company?.clientSatisfaction?.toString() || "",
   });
 
   const handleInputChange = (
@@ -64,8 +73,11 @@ export function CompanyForm() {
     setSuccess(false);
 
     try {
-      const response = await fetch("/api/companies", {
-        method: "POST",
+      const url = isEdit ? `/api/companies/${company.id}` : "/api/companies";
+      const method = isEdit ? "PUT" : "POST";
+
+      const response = await fetch(url, {
+        method,
         headers: {
           "Content-Type": "application/json",
         },
@@ -77,31 +89,36 @@ export function CompanyForm() {
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.error || "Failed to create company");
+        throw new Error(
+          errorData.error || `Failed to ${isEdit ? "update" : "create"} company`
+        );
       }
 
       setSuccess(true);
-      // Reset form
-      setFormData({
-        name: "",
-        description: "",
-        logo: "",
-        logoIpfsHash: "",
-        coverImage: "",
-        coverImageIpfsHash: "",
-        location: "",
-        established: "",
-        rating: "",
-        featured: false,
-        contactPhone: "",
-        contactEmail: "",
-        contactWebsite: "",
-        contactAddress: "",
-        totalSales: "",
-        averagePrice: "",
-        clientSatisfaction: "",
-      });
-      setSpecialties([]);
+
+      // Only reset form if creating new company
+      if (!isEdit) {
+        setFormData({
+          name: "",
+          description: "",
+          logo: "",
+          logoIpfsHash: "",
+          coverImage: "",
+          coverImageIpfsHash: "",
+          location: "",
+          established: "",
+          rating: "",
+          featured: false,
+          contactPhone: "",
+          contactEmail: "",
+          contactWebsite: "",
+          contactAddress: "",
+          totalSales: "",
+          averagePrice: "",
+          clientSatisfaction: "",
+        });
+        setSpecialties([]);
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : "An error occurred");
     } finally {
@@ -114,13 +131,15 @@ export function CompanyForm() {
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Building2 className="h-6 w-6" />
-          Add New Company
+          {isEdit ? "Edit Company" : "Add New Company"}
         </CardTitle>
       </CardHeader>
       <CardContent>
         {success && (
           <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-md">
-            <p className="text-green-800">Company created successfully!</p>
+            <p className="text-green-800">
+              Company {isEdit ? "updated" : "created"} successfully!
+            </p>
           </div>
         )}
 
@@ -407,8 +426,10 @@ export function CompanyForm() {
             {loading ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Creating Company...
+                {isEdit ? "Updating" : "Creating"} Company...
               </>
+            ) : isEdit ? (
+              "Update Company"
             ) : (
               "Create Company"
             )}

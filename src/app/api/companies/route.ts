@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getAllCompanies } from "@/services/companyService";
 import { prisma } from "@/lib/db";
+import { verifyAdminAuth } from "@/lib/auth";
 
 export async function GET() {
   try {
@@ -17,6 +18,12 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
+    // Verify admin authentication
+    const isAuthenticated = await verifyAdminAuth();
+    if (!isAuthenticated) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
     const body = await request.json();
 
     const {

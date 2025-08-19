@@ -18,26 +18,36 @@ interface PropertyImage {
   description: string;
 }
 
-export function PropertyForm() {
+interface PropertyFormProps {
+  property?: any;
+  isEdit?: boolean;
+}
+
+export function PropertyForm({ property, isEdit = false }: PropertyFormProps) {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
   const [companies, setCompanies] = useState<Company[]>([]);
-  const [features, setFeatures] = useState<string[]>([]);
+  const [features, setFeatures] = useState<string[]>(property?.features || []);
   const [newFeature, setNewFeature] = useState("");
-  const [images, setImages] = useState<PropertyImage[]>([]);
+  const [images, setImages] = useState<PropertyImage[]>(
+    property?.images?.map((img: any) => ({
+      url: img.url,
+      description: img.description || "",
+    })) || []
+  );
 
   const [formData, setFormData] = useState({
-    title: "",
-    price: "",
-    location: "",
-    type: "apartment",
-    bedrooms: "",
-    bathrooms: "",
-    area: "",
-    description: "",
-    status: "for-sale",
-    companyId: "",
+    title: property?.title || "",
+    price: property?.price?.toString() || "",
+    location: property?.location || "",
+    type: property?.type || "apartment",
+    bedrooms: property?.bedrooms?.toString() || "",
+    bathrooms: property?.bathrooms?.toString() || "",
+    area: property?.area?.toString() || "",
+    description: property?.description || "",
+    status: property?.status || "for-sale",
+    companyId: property?.companyId || "",
   });
 
   // Fetch companies on component mount
@@ -87,8 +97,11 @@ export function PropertyForm() {
     setSuccess(false);
 
     try {
-      const response = await fetch("/api/properties", {
-        method: "POST",
+      const url = isEdit ? `/api/properties/${property.id}` : "/api/properties";
+      const method = isEdit ? "PUT" : "POST";
+
+      const response = await fetch(url, {
+        method,
         headers: {
           "Content-Type": "application/json",
         },
@@ -101,25 +114,31 @@ export function PropertyForm() {
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.error || "Failed to create property");
+        throw new Error(
+          errorData.error ||
+            `Failed to ${isEdit ? "update" : "create"} property`
+        );
       }
 
       setSuccess(true);
-      // Reset form
-      setFormData({
-        title: "",
-        price: "",
-        location: "",
-        type: "apartment",
-        bedrooms: "",
-        bathrooms: "",
-        area: "",
-        description: "",
-        status: "for-sale",
-        companyId: "",
-      });
-      setFeatures([]);
-      setImages([]);
+
+      // Only reset form if creating new property
+      if (!isEdit) {
+        setFormData({
+          title: "",
+          price: "",
+          location: "",
+          type: "apartment",
+          bedrooms: "",
+          bathrooms: "",
+          area: "",
+          description: "",
+          status: "for-sale",
+          companyId: "",
+        });
+        setFeatures([]);
+        setImages([]);
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : "An error occurred");
     } finally {
@@ -132,13 +151,15 @@ export function PropertyForm() {
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Home className="h-6 w-6" />
-          Add New Property
+          {isEdit ? "Edit Property" : "Add New Property"}
         </CardTitle>
       </CardHeader>
       <CardContent>
         {success && (
           <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-md">
-            <p className="text-green-800">Property created successfully!</p>
+            <p className="text-green-800">
+              Property {isEdit ? "updated" : "created"} successfully!
+            </p>
           </div>
         )}
 
@@ -361,8 +382,10 @@ export function PropertyForm() {
             {loading ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Creating Property...
+                {isEdit ? "Updating" : "Creating"} Property...
               </>
+            ) : isEdit ? (
+              "Update Property"
             ) : (
               "Create Property"
             )}

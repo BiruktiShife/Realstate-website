@@ -1,8 +1,11 @@
-import { AdminLayout } from '@/components/AdminLayout';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Building2, Home, MapPin, Star } from 'lucide-react';
-import { getAllCompanies } from '@/services/companyService';
+import { AdminLayout } from "@/components/AdminLayout";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Building2, Home, MapPin, Star, Edit, Trash2 } from "lucide-react";
+import { getAllCompanies } from "@/services/companyService";
+import Link from "next/link";
+import { DeleteButton } from "@/components/DeleteButton";
 
 export default async function DataPage() {
   const companies = await getAllCompanies();
@@ -59,21 +62,42 @@ export default async function DataPage() {
               </CardHeader>
               <CardContent>
                 <p className="text-gray-600 mb-4">{company.description}</p>
-                
+
                 {/* Company Stats */}
                 <div className="grid grid-cols-3 gap-4 mb-4 p-4 bg-gray-50 rounded-lg">
                   <div className="text-center">
-                    <div className="font-semibold text-green-600">{company.stats.totalSales}</div>
+                    <div className="font-semibold text-green-600">
+                      {company.stats.totalSales}
+                    </div>
                     <div className="text-sm text-gray-500">Total Sales</div>
                   </div>
                   <div className="text-center">
-                    <div className="font-semibold text-blue-600">{company.stats.averagePrice}</div>
+                    <div className="font-semibold text-blue-600">
+                      {company.stats.averagePrice}
+                    </div>
                     <div className="text-sm text-gray-500">Avg Price</div>
                   </div>
                   <div className="text-center">
-                    <div className="font-semibold text-purple-600">{company.stats.clientSatisfaction}%</div>
+                    <div className="font-semibold text-purple-600">
+                      {company.stats.clientSatisfaction}%
+                    </div>
                     <div className="text-sm text-gray-500">Satisfaction</div>
                   </div>
+                </div>
+
+                {/* Company Actions */}
+                <div className="flex gap-2 mb-4">
+                  <Link href={`/admin/edit-company/${company.id}`}>
+                    <Button variant="outline" size="sm">
+                      <Edit className="w-4 h-4 mr-1" />
+                      Edit Company
+                    </Button>
+                  </Link>
+                  <DeleteButton
+                    id={company.id}
+                    type="company"
+                    name={company.name}
+                  />
                 </div>
 
                 {/* Specialties */}
@@ -97,21 +121,44 @@ export default async function DataPage() {
                     </h4>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                       {company.properties.map((property) => (
-                        <div key={property.id} className="border rounded-lg p-4">
+                        <div
+                          key={property.id}
+                          className="border rounded-lg p-4"
+                        >
                           <h5 className="font-medium">{property.title}</h5>
-                          <p className="text-sm text-gray-500 mb-2">{property.location}</p>
+                          <p className="text-sm text-gray-500 mb-2">
+                            {property.location}
+                          </p>
                           <div className="flex justify-between items-center">
                             <span className="font-semibold text-blue-600">
                               ${property.price.toLocaleString()}
                             </span>
                             <Badge variant="outline" className="capitalize">
-                              {property.status.replace('-', ' ')}
+                              {property.status.replace("-", " ")}
                             </Badge>
                           </div>
                           <div className="text-sm text-gray-500 mt-2">
                             {property.bedrooms && `${property.bedrooms} bed`}
-                            {property.bathrooms && ` • ${property.bathrooms} bath`}
+                            {property.bathrooms &&
+                              ` • ${property.bathrooms} bath`}
                             {` • ${property.area} sqft`}
+                          </div>
+                          <div className="flex gap-1 mt-3">
+                            <Link href={`/admin/edit-property/${property.id}`}>
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                className="text-xs"
+                              >
+                                <Edit className="w-3 h-3 mr-1" />
+                                Edit
+                              </Button>
+                            </Link>
+                            <DeleteButton
+                              id={property.id}
+                              type="property"
+                              name={property.title}
+                            />
                           </div>
                         </div>
                       ))}
@@ -127,8 +174,12 @@ export default async function DataPage() {
           <Card>
             <CardContent className="text-center py-12">
               <Building2 className="mx-auto h-12 w-12 text-gray-400 mb-4" />
-              <h3 className="text-lg font-medium text-gray-900 mb-2">No companies found</h3>
-              <p className="text-gray-500">Start by adding your first company to the database.</p>
+              <h3 className="text-lg font-medium text-gray-900 mb-2">
+                No companies found
+              </h3>
+              <p className="text-gray-500">
+                Start by adding your first company to the database.
+              </p>
             </CardContent>
           </Card>
         )}
